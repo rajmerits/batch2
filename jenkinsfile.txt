@@ -1,0 +1,29 @@
+pipeline {
+	agent any
+	
+	stages {
+		stage('Build') {
+			steps {
+				//Get some code from a GitHub Repository
+				git 'https://github.com/rajmerits/batch1.git'
+				// To run Maven on windows agent, use
+				bat "mvn -Dmaven.test.failure.ignore=true clean package"
+			}
+		stage('Test') {
+			steps {
+				//Get some code from a GitHub Repository
+				git 'https://github.com/rajmerits/batch1.git'
+				// To run Maven on windows agent, use
+				bat "mvn -Dmaven.test.failure.ignore=true clean test"
+			}
+		stage('Deploy') {
+			steps {
+				//Get some code from a GitHub Repository
+				git 'https://github.com/rajmerits/batch1.git'
+				// To run Maven on windows agent, use
+				bat "mvn -Dmaven.test.failure.ignore=true clean deploy -DmuleDeploy"
+				//bat "mvn clean package deploy -DmuleDeploy"
+			}
+		}
+	}
+}
